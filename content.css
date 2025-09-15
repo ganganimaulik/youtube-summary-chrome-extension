@@ -1,0 +1,31 @@
+#perplexity-summary-button {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Space between icon and text */
+    padding: 0 16px;
+    height: 36px;
+    border-radius: 18px; /* Pill shape */
+    border: none;
+    cursor: pointer;
+    font-family: "Roboto", "Arial", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap; /* Prevent text wrapping */
+    transition: background-color .2s; /* Smooth hover transition */
+    margin-right: 8px; /* Space from other buttons */
+}
+
+/* Specific hover style for light mode */
+html:not([dark]) #perplexity-summary-button:hover {
+    background-color: #e5e5e5 !important;
+}
+
+/* Specific hover style for dark mode */
+html[dark] #perplexity-summary-button:hover {
+    background-color: #3f3f3f !important;
+}
+
+#perplexity-summary-button img {
+    width: 20px;
+    height: 20px;
+}
