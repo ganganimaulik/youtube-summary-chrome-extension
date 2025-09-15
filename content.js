@@ -1,7 +1,7 @@
 // This script creates a stylish "Summarize" button that matches YouTube's UI.
 
 const BUTTON_ID = 'perplexity-summary-button';
-const BUTTON_CONTAINER_SELECTOR = '#top-level-buttons-computed';
+const BUTTON_CONTAINER_SELECTOR = '#above-the-fold #top-level-buttons-computed';
 const ICON_NAME = 'icon.png';
 const BUTTON_TEXT = 'Summarize';
 const ADD_BUTTON_DELAY_MS = 1000;
