@@ -1,7 +1,6 @@
 // This script listens for messages from the content script and opens a new tab.
 
-const DEFAULT_PROMPT = `Analyze the content of the video at this URL: {videoUrl}
-Please provide a comprehensive summary of this YouTube video: [VIDEO URL/TITLE]
+const DEFAULT_PROMPT = `Please provide a comprehensive summary of this YouTube video: {videoUrl}
 Include the following:
 # Main Topics
 - List the key topics discussed in order of appearance
@@ -20,13 +19,15 @@ Include the following:
 - Summarize the video's conclusion or final thoughts
 - Note any calls-to-action or next steps suggested
 Please organize this information in a scannable format with bullet points and clear sections. If the video includes any warnings, disclaimers, or important caveats, please highlight those as well.
-Length: Aim for a 3-10 minute read that captures 95% of the video's value."
+Length: Aim for a 3-5 minute read that captures 95% of the video's value.
 
 For tutorials: Include all steps in the process
 For interviews: Highlight key questions and answers
 For educational content: Add "Explain complex concepts in simple terms
 For reviews: Include pros, cons, and final verdict
 For q&a sessions: Summarize each question and detailed answers
+
+please dont repeat any details in your reply so users can get the most information in the least amount of time.
 `;
 
 // When the extension is installed, set the default prompt and AI provider
