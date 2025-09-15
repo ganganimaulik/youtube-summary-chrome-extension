@@ -32,11 +32,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-// This script listens for clicks on the extension icon and opens a new tab.
-chrome.action.onClicked.addListener((tab) => {
-    summarizeUrlInPerplexity(tab.url);
-});
-
 // This script listens for tab updates and sends a message to the content script.
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === 'complete' && tab.url && tab.url.includes('youtube.com/watch')) {
