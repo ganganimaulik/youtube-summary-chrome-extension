@@ -3,7 +3,25 @@
 function summarizeUrlInPerplexity(videoUrl) {
     if (!videoUrl) return;
 
-    const prompt = `${videoUrl} Extract the key points around this video. Summarize using bullet points from the most important to the least important. Write a roadmap on how to achieve what the speaker is trying to teach if speaker is teaching anything. make sure you dont miss any details regarding important keytake aways or something worth learning.`;
+    const prompt = `Analyze the content of the video at this URL: ${videoUrl}
+
+Your task is to provide a comprehensive summary with the following structure:
+
+### Key Takeaways (Most to Least Important)
+- Main point 1
+- Main point 2
+- ...
+
+### Learning Roadmap
+If the video is a tutorial or teaches a skill, provide a step-by-step roadmap for a beginner to follow. If not applicable, state that the video is not instructional.
+- **Step 1:** Description
+- **Step 2:** Description
+- ...
+
+### Noteworthy Details
+- Interesting detail or quote 1
+- Interesting detail or quote 2
+- ...`;
     const perplexityUrl = `https://www.perplexity.ai/search/?q=${encodeURIComponent(prompt)}`;
     chrome.tabs.create({ url: perplexityUrl });
 }
