@@ -55,7 +55,7 @@ function summarizeUrl(videoUrl) {
                 url = `https://chat.openai.com/?q=${encodeURIComponent(finalPrompt)}`;
                 break;
             case 'claude':
-                url = `https://claude.ai/chats?q=${encodeURIComponent(finalPrompt)}`;
+                url = `https://claude.ai/new?q=${encodeURIComponent(finalPrompt)}`;
                 break;
             case 'perplexity':
             default:
