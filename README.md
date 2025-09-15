@@ -1,17 +1,15 @@
 # YouTube Summarizer with AI
 
-This Chrome extension enhances your YouTube experience by providing a convenient way to summarize videos using a customizable prompt with your choice of AI provider.
+This Chrome extension enhances your YouTube experience by providing a convenient way to summarize videos using a customizable prompt with Perplexity.
 
 ## Features
 
 - **In-Page Summarize Button**: A "Summarize" button is automatically added to the YouTube video page, next to the like and dislike buttons.
-- **Multiple AI Providers**: Choose between Perplexity, Gemini, ChatGPT, and Claude to generate your summaries.
 - **Customizable Prompt**: Click the extension icon in your browser's toolbar to open a popup where you can edit and save your custom summarization prompt. The placeholder `{videoUrl}` will be automatically replaced with the video's URL.
 
 ## How to Use
 
 1.  **Configure the Extension**: Click the extension's icon in your Chrome toolbar. A popup will appear.
-    *   **Select AI Provider**: Choose your desired AI provider from the dropdown menu.
     *   **Customize the Prompt**: Edit the prompt in the textarea. **Your prompt must include the `{videoUrl}` placeholder.**
     *   Click "Save" to store your changes.
 2.  **Summarize a Video**: Navigate to any YouTube video, and you will see a "Summarize" button. Click it to open a new tab with the AI-generated summary.

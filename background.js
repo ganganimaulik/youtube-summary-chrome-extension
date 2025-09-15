@@ -31,12 +31,9 @@ For q&a sessions: Summarize each question and detailed answers
 
 // When the extension is installed, set the default prompt and AI provider
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.sync.get(['prompt', 'aiProvider'], ({ prompt, aiProvider }) => {
+    chrome.storage.sync.get(['prompt'], ({ prompt }) => {
         if (!prompt) {
             chrome.storage.sync.set({ prompt: DEFAULT_PROMPT });
-        }
-        if (!aiProvider) {
-            chrome.storage.sync.set({ aiProvider: 'perplexity' });
         }
     });
 });
@@ -44,24 +41,9 @@ chrome.runtime.onInstalled.addListener(() => {
 function summarizeUrl(videoUrl) {
     if (!videoUrl) return;
 
-    chrome.storage.sync.get(['prompt', 'aiProvider'], ({ prompt, aiProvider }) => {
+    chrome.storage.sync.get(['prompt'], ({ prompt }) => {
         const finalPrompt = prompt.replace('{videoUrl}', videoUrl);
-        let url;
-        switch (aiProvider) {
-            case 'gemini':
-                url = `https://gemini.google.com/app?q=${encodeURIComponent(finalPrompt)}`;
-                break;
-            case 'chatgpt':
-                url = `https://chat.openai.com/?q=${encodeURIComponent(finalPrompt)}`;
-                break;
-            case 'claude':
-                url = `https://claude.ai/new?q=${encodeURIComponent(finalPrompt)}`;
-                break;
-            case 'perplexity':
-            default:
-                url = `https://www.perplexity.ai/search/?q=${encodeURIComponent(finalPrompt)}`;
-                break;
-        }
+        const url = `https://www.perplexity.ai/search/?q=${encodeURIComponent(finalPrompt)}`;
         chrome.tabs.create({ url });
     });
 }
