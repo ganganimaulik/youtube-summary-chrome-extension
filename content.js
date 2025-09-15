@@ -44,22 +44,26 @@ function styleButtonForTheme(button) {
 }
 
 function addButton() {
-    const buttonContainer = document.querySelector(BUTTON_CONTAINER_SELECTOR);
-    if (!buttonContainer || document.getElementById(BUTTON_ID)) {
-        return; // Exit if container not found or button already exists
-    }
+    const buttonContainers = document.querySelectorAll(BUTTON_CONTAINER_SELECTOR);
 
-    const summarizeButton = createSummarizeButton();
-    styleButtonForTheme(summarizeButton);
+    buttonContainers.forEach(buttonContainer => {
+        // Check if button already exists in this container
+        if (buttonContainer.querySelector(`#${BUTTON_ID}`)) {
+            return; // Skip this container if button already exists
+        }
 
-    summarizeButton.addEventListener('click', () => {
-        chrome.runtime.sendMessage({
-            action: 'summarizeVideo',
-            url: window.location.href
+        const summarizeButton = createSummarizeButton();
+        styleButtonForTheme(summarizeButton);
+
+        summarizeButton.addEventListener('click', () => {
+            chrome.runtime.sendMessage({
+                action: 'summarizeVideo',
+                url: window.location.href
+            });
         });
-    });
 
-    buttonContainer.prepend(summarizeButton);
+        buttonContainer.prepend(summarizeButton);
+    });
 }
 
 // Listen for messages from the background script to add the button.
