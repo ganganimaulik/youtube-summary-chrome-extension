@@ -94,5 +94,10 @@ function addButton() {
     }
 }
 
-// YouTube's layout is dynamic, so we'll check for the button container periodically.
-setInterval(addButton, 1000);
+// Listen for messages from the background script.
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === 'addSummarizeButton') {
+        // Use a short delay to ensure the YouTube page has fully loaded its dynamic content.
+        setTimeout(addButton, 1000);
+    }
+});

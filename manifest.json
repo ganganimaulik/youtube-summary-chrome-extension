@@ -3,13 +3,13 @@
   "name": "YouTube Summarizer with Perplexity",
   "version": "1.0",
   "description": "Adds a button to YouTube videos to generate a summary using Perplexity.",
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "tabs"],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/watch*"],
+      "matches": ["https://www.youtube.com/*"],
       "js": ["content.js"]
     }
   ],
