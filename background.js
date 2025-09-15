@@ -1,9 +1,6 @@
 // This script listens for messages from the content script and opens a new tab.
 
-function summarizeUrlInPerplexity(videoUrl) {
-    if (!videoUrl) return;
-
-    const prompt = `Analyze the content of the video at this URL: ${videoUrl}
+const DEFAULT_PROMPT = `Analyze the content of the video at this URL: {videoUrl}
 
 Your task is to provide a comprehensive summary with the following structure:
 
@@ -22,19 +19,30 @@ If the video is a tutorial or teaches a skill, provide a step-by-step roadmap fo
 - Interesting detail or quote 1
 - Interesting detail or quote 2
 - ...`;
-    const perplexityUrl = `https://www.perplexity.ai/search/?q=${encodeURIComponent(prompt)}`;
-    chrome.tabs.create({ url: perplexityUrl });
+
+// When the extension is installed, set the default prompt
+chrome.runtime.onInstalled.addListener(() => {
+    chrome.storage.sync.get('prompt', ({ prompt }) => {
+        if (!prompt) {
+            chrome.storage.sync.set({ prompt: DEFAULT_PROMPT });
+        }
+    });
+});
+
+function summarizeUrlInPerplexity(videoUrl) {
+    if (!videoUrl) return;
+
+    chrome.storage.sync.get('prompt', ({ prompt }) => {
+        const finalPrompt = prompt.replace('{videoUrl}', videoUrl);
+        const perplexityUrl = `https://www.perplexity.ai/search/?q=${encodeURIComponent(finalPrompt)}`;
+        chrome.tabs.create({ url: perplexityUrl });
+    });
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'summarizeVideo') {
         summarizeUrlInPerplexity(request.url);
     }
-});
-
-// This script listens for clicks on the extension icon and opens a new tab.
-chrome.action.onClicked.addListener((tab) => {
-    summarizeUrlInPerplexity(tab.url);
 });
 
 // This script listens for tab updates and sends a message to the content script.
