@@ -2,6 +2,15 @@
 
 This Chrome extension enhances your YouTube experience by providing a convenient way to summarize videos using a customizable prompt with Perplexity.
 
+## Chrome Web Store
+
+The extension is published on the Chrome Web Store: [https://chromewebstore.google.com/detail/youtube-summarizer-with-p/ojnhkgapfojpnkmjpknedffgiakiicia](https://chromewebstore.google.com/detail/youtube-summarizer-with-p/ojnhkgapfojpnkmjpknedffgiakiicia)
+
+
+## Screenshot
+
+![Screenshot of the extension's popup](screenshot.png)
+
 ## Features
 
 - **In-Page Summarize Button**: A "Summarize" button is automatically added to the YouTube video page, next to the like and dislike buttons.
