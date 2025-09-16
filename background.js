@@ -2,9 +2,6 @@
 
 const DEFAULT_PROMPT = `Please provide a comprehensive summary of this YouTube video: {videoUrl}
 Include the following:
-# Main Topics
-- List the key topics discussed in order of appearance
-- Highlight the central thesis or main argument
 # Key Points & Details
 - Summarize the most important information, statistics, or facts presented
 - Include any notable examples or case studies mentioned
