@@ -6,9 +6,6 @@ This Chrome extension enhances your YouTube experience by providing a convenient
 
 The extension is published on the Chrome Web Store: [https://chromewebstore.google.com/detail/youtube-summarizer-with-p/ojnhkgapfojpnkmjpknedffgiakiicia](https://chromewebstore.google.com/detail/youtube-summarizer-with-p/ojnhkgapfojpnkmjpknedffgiakiicia)
 
-<a href="https://chromewebstore.google.com/detail/youtube-summarizer-with-p/ojnhkgapfojpnkmjpknedffgiakiicia">
-    <img src="logo.png" alt="Chrome Web Store Logo" width="128">
-</a>
 
 ## Screenshot
 
