@@ -52,4 +52,3 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-// The content script is now self-sufficient and no longer needs messages from the background script.
