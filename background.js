@@ -52,16 +52,3 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-// This script listens for tab updates and sends a message to the content script.
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.status === 'complete' && tab.url && tab.url.includes('youtube.com/watch')) {
-        chrome.tabs.sendMessage(tabId, { action: 'addSummarizeButton' });
-    }
-});
-
-// Listen for SPA navigations
-chrome.webNavigation.onHistoryStateUpdated.addListener(details => {
-    if (details.url && details.url.includes('youtube.com/watch')) {
-        chrome.tabs.sendMessage(details.tabId, { action: 'addSummarizeButton' });
-    }
-});
