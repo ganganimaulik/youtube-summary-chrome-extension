@@ -58,3 +58,10 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         chrome.tabs.sendMessage(tabId, { action: 'addSummarizeButton' });
     }
 });
+
+// Listen for SPA navigations
+chrome.webNavigation.onHistoryStateUpdated.addListener(details => {
+    if (details.url && details.url.includes('youtube.com/watch')) {
+        chrome.tabs.sendMessage(details.tabId, { action: 'addSummarizeButton' });
+    }
+});
