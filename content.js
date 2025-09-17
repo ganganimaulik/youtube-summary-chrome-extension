@@ -4,7 +4,8 @@ const BUTTON_ID = 'perplexity-summary-button';
 const BUTTON_CONTAINER_SELECTOR = '#above-the-fold #top-level-buttons-computed';
 const ICON_NAME = 'icon.png';
 const BUTTON_TEXT = 'Summarize';
-const ADD_BUTTON_DELAY_MS = 1000;
+
+let observer = null;
 
 function createSummarizeButton() {
     const button = document.createElement('button');
@@ -44,32 +45,49 @@ function styleButtonForTheme(button) {
 }
 
 function addButton() {
-    const buttonContainers = document.querySelectorAll(BUTTON_CONTAINER_SELECTOR);
+    if (!window.location.href.includes('youtube.com/watch')) {
+        return;
+    }
 
-    buttonContainers.forEach(buttonContainer => {
-        // Check if button already exists in this container
-        if (buttonContainer.querySelector(`#${BUTTON_ID}`)) {
-            return; // Skip this container if button already exists
-        }
+    const buttonContainer = document.querySelector(BUTTON_CONTAINER_SELECTOR);
+    if (!buttonContainer || buttonContainer.querySelector(`#${BUTTON_ID}`)) {
+        return;
+    }
 
-        const summarizeButton = createSummarizeButton();
-        styleButtonForTheme(summarizeButton);
+    const summarizeButton = createSummarizeButton();
+    styleButtonForTheme(summarizeButton);
 
-        summarizeButton.addEventListener('click', () => {
-            chrome.runtime.sendMessage({
-                action: 'summarizeVideo',
-                url: window.location.href
-            });
+    summarizeButton.addEventListener('click', () => {
+        chrome.runtime.sendMessage({
+            action: 'summarizeVideo',
+            url: window.location.href
         });
+    });
 
-        buttonContainer.prepend(summarizeButton);
+    buttonContainer.prepend(summarizeButton);
+}
+
+function startObserver() {
+    if (observer) {
+        observer.disconnect();
+    }
+
+    observer = new MutationObserver(() => {
+        addButton();
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true,
     });
 }
 
-// Listen for messages from the background script to add the button.
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === 'addSummarizeButton') {
-        // Use a delay to ensure the YouTube page has fully loaded its dynamic content.
-        setTimeout(addButton, ADD_BUTTON_DELAY_MS);
-    }
+// Handle initial load
+startObserver();
+
+// Handle SPA navigation
+document.addEventListener('yt-navigate-finish', () => {
+    // The DOM is updated, so we just need to try adding the button.
+    // The observer will also catch this, but calling it directly can be faster.
+    addButton();
 });
